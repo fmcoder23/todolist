@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page | To-do list creator</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      div {
+        padding-top: 100px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 5px;
+        padding: 12px 30px;
+        margin: 10px;
+        font-size: 12px;
+        background-color: blueviolet;
+        color: white;
+      }
+
+      .name {
+        border: 1px solid #828282;
+        width: 400px;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 15px;
+      }
+
+      table td,
+      table th {
+        border: 1px solid #828282;
+        padding: 10px 20px;
+      }
+
+      .editbtn {
+        padding: 5px 15px;
+        background-color: blueviolet;
+        border: none;
+        border-radius: 5px;
+        font-size: 12px;
+        margin-left: 10px;
+        color: white;
+      }
+
+      .editinput {
+        width: 200px;
+        border: 1px solid #828282;
+        border-radius: 5px;
+        padding: 5px 15px;
+        font-size: 12px;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Welcome to To-do list creator!</h1>
+      <form action="/api/todos/create" method="post">
+        <input
+          type="text"
+          name="name"
+          id=""
+          placeholder="Enter a task"
+          class="name"
+        />
+        <input type="submit" value="CREATE A TASK" class="btn" />
+      </form>
+
+      <table>
+        <tr>
+          <th>Name</th>
+          <th colspan="2">Action</th>
+        </tr>
+        <% todos.forEach(function(todo) { %> <% if (todo.userID === req.user.id)
+        { %>
+        <tr>
+          <td><%= todo.name %></td>
+          <td><a href="/api/todos/remove/<%= todo.name %>">Delete</a></td>
+          <td>
+            <form action="/api/todos/edit/<%= todo.name %>" method="post">
+              <input
+                type="text"
+                name="name"
+                id=""
+                placeholder="Enter new name"
+                class="editinput"
+              />
+              <input type="submit" value="Edit" class="editbtn" />
+            </form>
+          </td>
+        </tr>
+        <% } %> <% }); %>
+      </table>
+      <a href="/api/auth/logout">Logout</a>
+    </div>
+  </body>
+</html>
